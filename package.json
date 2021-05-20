@@ -1,17 +1,28 @@
 {
-  "name": "v3plugin",
-  "version": "0.1.2",
-  "main": "./lib/vplugin.umd.min.js",
+  "name": "slider-verify-v3",
+  "version": "1.0.0",
+  "description": "一个基于vue3.js和canvas的滑块拼图校验插件",
+  "author": "fuyf<771085570@qq.com>",
+  "keywords": [
+    "slider-verify",
+    "vue插件",
+    "滑块校验插件",
+    "拼图校验插件",
+    "vue",
+    "canvas",
+    "javascript"
+  ],
+  "main": "./lib/SliderVerify.umd.min.js",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "build:lib": "vue-cli-service build --target lib --name vplugin --dest lib  src/components/index.ts"
+    "build:lib": "vue-cli-service build --target lib --name SliderVerify --dest lib  src/components/index.ts"
   },
   "dependencies": {
     "core-js": "^3.6.5",
     "vant": "^3.0.16",
-    "vue": "^3.0.0",
+    "vue": "^3.1.0-beta.3",
     "vue-router": "^4.0.0-0",
     "vuex": "^4.0.0-0"
   },
@@ -34,7 +45,8 @@
     "typescript": "~4.1.5"
   },
   "files": [
-    "lib/vplugin.umd.min.js",
+    "lib/SliderVerify.umd.min.js",
+    "lib/SliderVerify.css",
     "index.d.ts"
   ]
 }

@@ -1,5 +1,4 @@
 import { App } from 'vue'
-
 // import toast from './Toast/index';
 // import Button from './Button/index.vue';
 import SliderVerify from './SliderVerify/index.vue';
@@ -10,7 +9,11 @@ const install = function (app: App): void {
   app.component(SliderVerify.name, SliderVerify)
 }
 
+export {
+  install
+}
+
 // 默认导出 install
 export default {
-  install,
+  install
 };

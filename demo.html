@@ -1,0 +1,34 @@
+<meta charset="utf-8">
+<title>SliderVerify demo</title>
+<link rel="stylesheet" href="./SliderVerify.css">
+<link rel="stylesheet" href="https://unpkg.com/element-plus/lib/theme-chalk/index.css">
+<body>
+  <div id="app">
+    app
+    {{isShowSelf}}
+    <el-button>{{ '点击' }}</el-button>
+    <SliderVerify :is-show-self="true"></SliderVerify>
+    <slider-verify :is-show-self="true"></slider-verify>
+  </div>
+</body>
+<script src="https://unpkg.com/vue@next"></script>
+<script src="./SliderVerify.umd.js"></script>
+<script src="https://unpkg.com/element-plus/lib/index.full.js"></script>
+
+<script>
+  console.log('SliderVerify', SliderVerify)
+  console.log('ElementPlus', ElementPlus)
+  const app = Vue.createApp({
+    data() {
+      return {
+        isShowSelf: true
+      }
+    }
+  })
+  app.component(SliderVerify.SliderVerify)
+  app.use(SliderVerify).use(ElementPlus).mount('#app')
+  console.log('app', app)
+  console.log('SliderVerify.install', SliderVerify.install)
+  console.log('SliderVerify.SliderVerify', SliderVerify.SliderVerify)
+  console.log('ElementPlus.install', ElementPlus.install)
+</script>
