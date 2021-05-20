@@ -2,12 +2,49 @@
 <title>SliderVerify demo</title>
 <link rel="stylesheet" href="./SliderVerify.css">
 <link rel="stylesheet" href="https://unpkg.com/element-plus/lib/theme-chalk/index.css">
+<style>
+  .demo {
+    padding-left: 50px;
+    margin: 30px auto 0;
+  }
+
+  .opreation span {
+    margin-left: 20px;
+  }
+</style>
 <body>
   <div id="app">
-    app
-    {{isShowSelf}}
-    <el-button @click="isShowSelf = !isShowSelf">{{ '点击' }}</el-button>
-    <slider-verify v-model:is-show-self="isShowSelf"></slider-verify>
+    <div class="demo">
+      <div class="opreation">
+        <span @click="isShowSelf = !isShowSelf">isShowSelf</span>
+        <span @click="width = 400">width 400</span>
+        <span @click="height = 200">height 220</span>
+        <span @click="imgUrl = 'https://portal.fuyunfeng.top/files/images/SliderVerify-31.jpg'">imgUrl</span>
+        <span @click="sText = '成功'">sText 成功</span>
+        <span @click="eText = '失败'">eText 失败</span>
+        <span @click="isBorder = !isBorder">isBorder 取反</span>
+        <span @click="isParentNode = !isParentNode">isParentNode 取反</span>
+        <span @click="isCloseBtn = !isCloseBtn">isCloseBtn 取反</span>
+        <span @click="isReloadBtn = !isReloadBtn">isReloadBtn 取反</span>
+      </div>
+      <slider-verify 
+        v-model:is-show-self="isShowSelf"
+        :width="width"
+        :height="height"
+        :img-url="imgUrl"
+        :s-text="sText"
+        :e-text="eText"
+        :is-border="isBorder"
+        :is-close-btn="isCloseBtn"
+        :is-reload-btn="isReloadBtn"
+        :is-parent-node="isParentNode"
+        @reload="emitChange('reload')"
+        @show="emitChange('show')"
+        @hide="emitChange('hide')"
+        @close="emitChange('close')"
+        @success="emitChange('success')"
+        @fail="emitChange('fail')"></slider-verify>
+    </div>
   </div>
 </body>
 <script src="https://unpkg.com/vue@next"></script>
@@ -15,19 +52,27 @@
 <script src="https://unpkg.com/element-plus/lib/index.full.js"></script>
 
 <script>
-  console.log('SliderVerify', SliderVerify)
-  console.log('ElementPlus', ElementPlus)
   const app = Vue.createApp({
     data() {
       return {
-        isShowSelf: true
+        isShowSelf: true,
+        width: 300,
+        height: 180,
+        imgUrl: '',
+        sText: 'sText',
+        eText: 'eText',
+        isBorder: true,
+        isCloseBtn: true,
+        isReloadBtn: true,
+        isParentNode: false
+      }
+    },
+    methods: {
+      emitChange(type) {
+        console.log(type)
       }
     }
   })
   app.component(SliderVerify.SliderVerify)
   app.use(SliderVerify).use(ElementPlus).mount('#app')
-  console.log('app', app)
-  console.log('SliderVerify.install', SliderVerify.install)
-  console.log('SliderVerify.SliderVerify', SliderVerify.SliderVerify)
-  console.log('ElementPlus.install', ElementPlus.install)
 </script>
