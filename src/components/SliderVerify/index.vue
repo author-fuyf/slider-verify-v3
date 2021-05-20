@@ -95,7 +95,7 @@ import {
   defineComponent,
   reactive,
   watch,
-  watchEffect,
+  computed,
   onMounted,
   toRefs,
 } from 'vue'
@@ -387,14 +387,23 @@ export default defineComponent({
       }
     )
 
-    watchEffect(() => {
+    const repaint = computed(() => {
       const width = props.width
       const height = props.height
       const isBorder = props.isBorder
       const imgUrl = props.imgUrl
       const isParentNode = props.isParentNode
-      console.log(width, height, isBorder, imgUrl, isParentNode)
-      if (state.isLoad) initCanvas()
+      return {
+        width,
+        height,
+        isBorder,
+        imgUrl,
+        isParentNode
+      }
+    })
+
+    watch(repaint, () => {
+      initCanvas()
     })
 
     onMounted(() => {

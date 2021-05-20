@@ -6,9 +6,8 @@
   <div id="app">
     app
     {{isShowSelf}}
-    <el-button>{{ '点击' }}</el-button>
-    <SliderVerify :is-show-self="true"></SliderVerify>
-    <slider-verify :is-show-self="true"></slider-verify>
+    <el-button @click="isShowSelf = !isShowSelf">{{ '点击' }}</el-button>
+    <slider-verify v-model:is-show-self="isShowSelf"></slider-verify>
   </div>
 </body>
 <script src="https://unpkg.com/vue@next"></script>
