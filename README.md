@@ -16,7 +16,9 @@
 
 ## Demo演示
 
-> **plugins_v3**：[https://portal.fuyunfeng.top/plugins_v3/index.html](https://portal.fuyunfeng.top/plugins_v3/index.html)  
+> **Demo**：[https://portal.fuyunfeng.top/plugins_v3/index.html](https://portal.fuyunfeng.top/plugins_v3/index.html)  
+
+> **在vue2.js中使用?**: [https://github.com/author-fuyf/slider-verify-v2](https://github.com/author-fuyf/slider-verify-v2)  
 
 ## 使用
 
