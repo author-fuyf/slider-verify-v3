@@ -19,11 +19,17 @@
             :style="{ width: `${width}px`, height: `${height}px` }"
             v-if="loading"
           >
-            <loading type="circular" vertical>
+            <loading
+              type="circular"
+              vertical
+            >
               <span>加载中...</span>
             </loading>
           </div>
-          <canvas id="bg_canvas" v-show="!loading"></canvas>
+          <canvas
+            id="bg_canvas"
+            v-show="!loading"
+          ></canvas>
           <canvas
             v-show="!loading"
             id="block_canvas"
@@ -34,6 +40,7 @@
                 drag(e, 'block_canvas', 'circle')
               }
             "
+            @click="e => drag(e, 'block_canvas', 'circle', true)"
           ></canvas>
         </div>
         <div class="slide-box">
@@ -46,22 +53,51 @@
                 drag(e, 'circle', 'block_canvas')
               }
             "
+            @click="e => drag(e, 'circle', 'block_canvas', true)"
           >
-            <div class="verticals" v-show="!isTouch">
-              <img src="./images/vertical_line.png" alt="" />
-              <img src="./images/vertical_line.png" alt="" />
-              <img src="./images/vertical_line.png" alt="" />
+            <div
+              class="verticals"
+              v-show="!isTouch"
+            >
+              <img
+                src="./images/vertical_line.png"
+                alt=""
+              />
+              <img
+                src="./images/vertical_line.png"
+                alt=""
+              />
+              <img
+                src="./images/vertical_line.png"
+                alt=""
+              />
             </div>
-            <div class="arrow" v-show="isTouch">
-              <img src="./images/arrow_left.png" alt="" />
-              <img src="./images/circle.png" class="circle" alt="" />
-              <img src="./images/arrow_right.png" alt="" />
+            <div
+              class="arrow"
+              v-show="isTouch"
+            >
+              <img
+                src="./images/arrow_left.png"
+                alt=""
+              />
+              <img
+                src="./images/circle.png"
+                class="circle"
+                alt=""
+              />
+              <img
+                src="./images/arrow_right.png"
+                alt=""
+              />
             </div>
           </div>
           <span id="placehold">拖动滑块完成拼图</span>
         </div>
 
-        <div class="operational" v-if="isCloseBtn || isReloadBtn">
+        <div
+          class="operational"
+          v-if="isCloseBtn || isReloadBtn"
+        >
           <img
             src="./images/close.png"
             alt=""
@@ -156,7 +192,15 @@ export default defineComponent({
     Popup,
     Loading,
   },
-  emits: ['update:isShowSelf', 'hide', 'show', 'fail', 'success', 'close', 'reload'],
+  emits: [
+    'update:isShowSelf',
+    'hide',
+    'show',
+    'fail',
+    'success',
+    'close',
+    'reload',
+  ],
   setup(props, context) {
     const state = reactive({
       popupShow: false,
@@ -171,7 +215,7 @@ export default defineComponent({
     })
 
     const reload = () => {
-      initCanvas();
+      initCanvas()
       context.emit('reload')
     }
 
@@ -184,7 +228,12 @@ export default defineComponent({
       return document.getElementById('canvas_containe')
     }
 
-    const drag = (event: any, targetId: string, linkageId: string) => {
+    const drag = (
+      event: any,
+      targetId: string,
+      linkageId: string,
+      isClick = false
+    ) => {
       // console.log("clickE => ", event);
       state.isTouch = true
       const targetDom = document.querySelector(
@@ -228,6 +277,9 @@ export default defineComponent({
         document.removeEventListener('touchmove', move)
         document.removeEventListener('touchend', up)
 
+        targetDom.style.left = '0'
+        linkageDom.style.left = '0'
+
         // console.log('x', x)
 
         // 图块契合度 左右5 偏差
@@ -245,10 +297,10 @@ export default defineComponent({
         setTimeout(() => {
           state.popupShow = false
         }, 500)
-        targetDom.style.left = '0'
-        linkageDom.style.left = '0'
         initCanvas()
       }
+
+      if (isClick) up()
 
       if (terminal === 'pc') {
         document.addEventListener('mousemove', move)
@@ -259,7 +311,11 @@ export default defineComponent({
       }
     }
 
-    const draw = (ctx: any, xy: { x: number; y: number, r: number }, type: string) => {
+    const draw = (
+      ctx: any,
+      xy: { x: number; y: number; r: number },
+      type: string
+    ) => {
       const x = xy.x,
         y = xy.y
       ctx.beginPath()
@@ -280,17 +336,20 @@ export default defineComponent({
     }
 
     const initCanvas = () => {
+      if (state.isLoad) return
+
+      state.isLoad = true
       state.loading = true
 
       const bg_canvas = document.getElementById(
         'bg_canvas'
       ) as HTMLCanvasElement
-      const bg_ctx = bg_canvas.getContext('2d')
+      const bg_ctx = bg_canvas.getContext('2d') as any
 
       const block_canvas = document.getElementById(
         'block_canvas'
       ) as HTMLCanvasElement
-      const block_ctx = block_canvas.getContext('2d')
+      const block_ctx = block_canvas.getContext('2d') as any
 
       const placehold = document.getElementById(
         'placehold'
@@ -333,8 +392,8 @@ export default defineComponent({
           'plugin-slider-verify_containe'
         ) as HTMLCanvasElement
         // const s_verify_width = sliderVerify.parentNode.clientWidth
-        const s_verify_width = sliderVerify.parentElement?.getBoundingClientRect()
-          .width
+        const s_verify_width =
+          sliderVerify.parentElement?.getBoundingClientRect().width
         // sliderVerify.style.width = s_verify_width
 
         s_verify_width ? (width = s_verify_width - 20) : null
@@ -365,15 +424,16 @@ export default defineComponent({
         draw(bg_ctx, { x: blkTilesW, y: Y, r: r }, 'fill')
         draw(block_ctx, { x: blkTilesW, y: Y, r: r }, 'clip')
 
-        bg_ctx?.drawImage(img, 0, 0, width, height)
-        block_ctx?.drawImage(img, 0, 0, width, height)
+        bg_ctx.drawImage(img, 0, 0, width, height)
+        block_ctx.drawImage(img, 0, 0, width, height)
 
         // 提取滑块放至左侧 并重置滑块画布宽度
         const y = Y - r * 2 - 1
-        const ImageData = block_ctx?.getImageData(blkTilesW - 3, y, L, L)
+        const ImageData = block_ctx.getImageData(blkTilesW - 3, y, L, L)
         block_canvas.width = L
-        ImageData ? block_ctx?.putImageData(ImageData, 0, y) : null
-        state.isLoad = true
+        block_ctx.putImageData(ImageData, 0, y)
+
+        state.isLoad = false
       }
     }
 
@@ -398,7 +458,7 @@ export default defineComponent({
         height,
         isBorder,
         imgUrl,
-        isParentNode
+        isParentNode,
       }
     })
 
@@ -407,7 +467,6 @@ export default defineComponent({
     })
 
     onMounted(() => {
-      console.log('SliderVerify init')
       initCanvas()
     })
 
@@ -486,7 +545,7 @@ export default defineComponent({
 
       #block_canvas {
         position: absolute;
-        left: 0px;
+        left: 0;
         cursor: pointer;
       }
 
@@ -525,7 +584,7 @@ export default defineComponent({
 
         .verticals {
           display: flex;
-          align-item: center;
+          align-items: center;
 
           img {
             width: 8px;

@@ -1,7 +1,7 @@
 <template>
   <div class="about">
     <!--  :imgUrl="'https://portal.fuyunfeng.top/files/images/SliderVerify-3.jpg'" -->
-    <div class="opreation">
+    <!-- <div class="opreation">
       <span @click="imgUrl = 'https://portal.fuyunfeng.top/files/images/SliderVerify-31.jpg'">imgUrl</span>
       <span @click="isShowSelf = !isShowSelf">isShowSelf</span>
       <span @click="width = 400">width 400</span>
@@ -10,30 +10,27 @@
       <span @click="isParentNode = !isParentNode">isParentNode 取反</span>
       <span @click="isCloseBtn = !isCloseBtn">isCloseBtn 取反</span>
       <span @click="isReloadBtn = !isReloadBtn">isReloadBtn 取反</span>
-    </div>
-    <SliderVerify 
-        v-model:isShowSelf="isShowSelf"
-        :width="width"
-        :height="height"
-        :isBorder="isBorder"
-        :imgUrl="imgUrl"
-        :isCloseBtn="isCloseBtn"
-        :isReloadBtn="isReloadBtn"
-        :isParentNode="isParentNode"
-        @reload="reload"
-        @show="show"
-        @hide="hide"
-        @close="close"
-        @success="success"
-        @fail="fail"></SliderVerify>
+    </div> -->
+    <SliderVerify
+      v-model:isShowSelf="isShowSelf"
+      :width="width"
+      :height="height"
+      :isBorder="isBorder"
+      :imgUrl="imgUrl"
+      :isCloseBtn="isCloseBtn"
+      :isReloadBtn="isReloadBtn"
+      :isParentNode="isParentNode"
+      @reload="reload"
+      @show="show"
+      @hide="hide"
+      @close="close"
+      @success="success"
+      @fail="fail"
+    ></SliderVerify>
   </div>
 </template>
 <script lang="ts">
-import {
-  defineComponent,
-  reactive,
-  toRefs,
-} from 'vue'
+import { defineComponent, reactive, toRefs } from 'vue'
 export default defineComponent({
   setup() {
     const state = reactive({
@@ -44,7 +41,7 @@ export default defineComponent({
       imgUrl: '',
       isCloseBtn: true,
       isReloadBtn: true,
-      isParentNode: false
+      isParentNode: false,
     })
 
     const show = () => {
@@ -72,9 +69,9 @@ export default defineComponent({
       close,
       success,
       fail,
-      reload
+      reload,
     }
-  }
+  },
 })
 </script>
 <style lang="stylus">
