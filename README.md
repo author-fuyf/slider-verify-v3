@@ -100,7 +100,7 @@ createApp(App).use(SliderVerify)
       @fail="emitChange('fail')"></slider-verify>
   </div>
 </body>
-<script src="https://unpkg.com/vue@next"></script>
+<script src="https://unpkg.com/vue@3.3.2/dist/vue.global.js"></script>
 <script src="./SliderVerify.umd.js"></script>
 
 <script>

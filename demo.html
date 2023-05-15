@@ -1,7 +1,8 @@
+// eslint-disable
 <meta charset="utf-8">
 <title>SliderVerify demo</title>
-<link rel="stylesheet" href="./SliderVerify.css">
-<link rel="stylesheet" href="https://unpkg.com/element-plus/lib/theme-chalk/index.css">
+<!-- <link rel="stylesheet" href="./lib/SliderVerify.css"> -->
+<link rel="stylesheet" href="https://portal.fuyunfeng.top/api/files/download_file?file_name=SliderVerify-v3.css">
 <style>
   .demo {
     padding-left: 50px;
@@ -12,6 +13,7 @@
     margin-left: 20px;
   }
 </style>
+
 <body>
   <div id="app">
     <div class="demo">
@@ -27,29 +29,17 @@
         <span @click="isCloseBtn = !isCloseBtn">isCloseBtn 取反</span>
         <span @click="isReloadBtn = !isReloadBtn">isReloadBtn 取反</span>
       </div>
-      <slider-verify 
-        v-model:is-show-self="isShowSelf"
-        :width="width"
-        :height="height"
-        :img-url="imgUrl"
-        :s-text="sText"
-        :e-text="eText"
-        :is-border="isBorder"
-        :is-close-btn="isCloseBtn"
-        :is-reload-btn="isReloadBtn"
-        :is-parent-node="isParentNode"
-        @reload="emitChange('reload')"
-        @show="emitChange('show')"
-        @hide="emitChange('hide')"
-        @close="emitChange('close')"
-        @success="emitChange('success')"
+      <slider-verify v-model:is-show-self="isShowSelf" :width="width" :height="height" :img-url="imgUrl" :s-text="sText"
+        :e-text="eText" :is-border="isBorder" :is-close-btn="isCloseBtn" :is-reload-btn="isReloadBtn"
+        :is-parent-node="isParentNode" @reload="emitChange('reload')" @show="emitChange('show')"
+        @hide="emitChange('hide')" @close="emitChange('close')" @success="emitChange('success')"
         @fail="emitChange('fail')"></slider-verify>
     </div>
   </div>
 </body>
-<script src="https://unpkg.com/vue@next"></script>
-<script src="./SliderVerify.umd.js"></script>
-<script src="https://unpkg.com/element-plus/lib/index.full.js"></script>
+<script src="https://unpkg.com/vue@3.3.2/dist/vue.global.js"></script>
+<!-- <script src="./lib/SliderVerify.umd.js"></script> -->
+<script src="https://portal.fuyunfeng.top/api/files/download_file?file_name=SliderVerify.umd-v3.js"></script>
 
 <script>
   const app = Vue.createApp({
@@ -73,5 +63,5 @@
       }
     }
   })
-  app.use(SliderVerify).use(ElementPlus).mount('#app')
+  app.use(SliderVerify).mount('#app')
 </script>
