@@ -40,7 +40,10 @@
                 drag(e, 'block_canvas', 'circle')
               }
             "
-            @click="e => drag(e, 'block_canvas', 'circle', true)"
+            @click="e => {
+              terminal = setTerminal()
+              drag(e, 'block_canvas', 'circle', true)
+            }"
           ></canvas>
         </div>
         <div class="slide-box">
@@ -53,7 +56,10 @@
                 drag(e, 'circle', 'block_canvas')
               }
             "
-            @click="e => drag(e, 'circle', 'block_canvas', true)"
+            @click="e => {
+              terminal = setTerminal()
+              drag(e, 'circle', 'block_canvas', true)
+            }"
           >
             <div
               class="verticals"
@@ -214,6 +220,16 @@ export default defineComponent({
       isLoad: false,
     })
 
+    const isMobile = () => {
+      return navigator.userAgent.match(
+        /(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i
+      );
+    }
+
+    const setTerminal = () => {
+      return isMobile() ? 'mobile' : 'pc'
+    }
+
     const reload = () => {
       initCanvas()
       context.emit('reload')
@@ -300,8 +316,6 @@ export default defineComponent({
         initCanvas()
       }
 
-      if (isClick) up()
-
       if (terminal === 'pc') {
         document.addEventListener('mousemove', move)
         document.addEventListener('mouseup', up)
@@ -309,6 +323,8 @@ export default defineComponent({
         document.addEventListener('touchmove', move)
         document.addEventListener('touchend', up)
       }
+
+      if (isClick) up()
     }
 
     const draw = (
@@ -477,6 +493,7 @@ export default defineComponent({
       close,
       reload,
       getContainer,
+      setTerminal
     }
   },
 })
