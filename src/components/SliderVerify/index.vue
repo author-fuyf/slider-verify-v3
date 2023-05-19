@@ -4,135 +4,64 @@
       <img ref="bgImgRef" crossOrigin :src="imgUrl" v-if="imgUrl" />
       <img ref="bgImgRef" :src="require(`./images/bg${bgRandom}.jpg`)" v-else />
     </div> -->
-    <div
-      id="slider-verify"
-      :class="{ 'is-border': isBorder }"
-      v-show="isShowSelf"
-    >
-      <div
-        id="verify_containe"
-        :class="{ 'is-opt': isCloseBtn || isReloadBtn }"
-      >
+    <div id="slider-verify" :class="{ 'is-border': isBorder }" v-show="isShowSelf">
+      <div id="verify_containe" :class="{ 'is-opt': isCloseBtn || isReloadBtn }">
         <div id="canvas_containe">
-          <div
-            class="loading"
-            :style="{ width: `${width}px`, height: `${height}px` }"
-            v-if="loading"
-          >
-            <loading
-              type="circular"
-              vertical
-            >
+          <div class="loading" :style="{ width: `${width}px`, height: `${height}px` }" v-if="loading">
+            <loading type="circular" vertical>
               <span>加载中...</span>
             </loading>
           </div>
-          <canvas
-            id="bg_canvas"
-            v-show="!loading"
-          ></canvas>
-          <canvas
-            v-show="!loading"
-            id="block_canvas"
-            @mousedown.prevent="(e) => drag(e, 'block_canvas', 'circle')"
-            @touchstart="
-              (e) => {
-                terminal = 'mobile'
-                drag(e, 'block_canvas', 'circle')
-              }
-            "
-            @click="e => {
-              terminal = setTerminal()
-              drag(e, 'block_canvas', 'circle', true)
-            }"
-          ></canvas>
+          <canvas id="bg_canvas" v-show="!loading"></canvas>
+          <canvas v-show="!loading" id="block_canvas" @mousedown.prevent="(e) => drag(e, 'block_canvas', 'circle')"
+            @touchstart="(e) => {
+              terminal = 'mobile'
+              drag(e, 'block_canvas', 'circle')
+            }
+              " @click="e => {
+    terminal = setTerminal()
+    drag(e, 'block_canvas', 'circle', true)
+  }"></canvas>
         </div>
         <div class="slide-box">
-          <div
-            id="circle"
-            @mousedown.prevent="(e) => drag(e, 'circle', 'block_canvas')"
-            @touchstart="
-              (e) => {
-                terminal = 'mobile'
-                drag(e, 'circle', 'block_canvas')
-              }
-            "
-            @click="e => {
-              terminal = setTerminal()
-              drag(e, 'circle', 'block_canvas', true)
-            }"
-          >
-            <div
-              class="verticals"
-              v-show="!isTouch"
-            >
-              <img
-                src="./images/vertical_line.png"
-                alt=""
-              />
-              <img
-                src="./images/vertical_line.png"
-                alt=""
-              />
-              <img
-                src="./images/vertical_line.png"
-                alt=""
-              />
+          <div id="circle" @mousedown.prevent="(e) => drag(e, 'circle', 'block_canvas')" @touchstart="(e) => {
+            terminal = 'mobile'
+            drag(e, 'circle', 'block_canvas')
+          }
+            " @click="e => {
+    terminal = setTerminal()
+    drag(e, 'circle', 'block_canvas', true)
+  }">
+            <div class="verticals" v-show="!isTouch">
+              <img src="./images/vertical_line.png" alt="" />
+              <img src="./images/vertical_line.png" alt="" />
+              <img src="./images/vertical_line.png" alt="" />
             </div>
-            <div
-              class="arrow"
-              v-show="isTouch"
-            >
-              <img
-                src="./images/arrow_left.png"
-                alt=""
-              />
-              <img
-                src="./images/circle.png"
-                class="circle"
-                alt=""
-              />
-              <img
-                src="./images/arrow_right.png"
-                alt=""
-              />
+            <div class="arrow" v-show="isTouch">
+              <img src="./images/arrow_left.png" alt="" />
+              <img src="./images/circle.png" class="circle" alt="" />
+              <img src="./images/arrow_right.png" alt="" />
             </div>
           </div>
           <span id="placehold">拖动滑块完成拼图</span>
         </div>
 
-        <div
-          class="operational"
-          v-if="isCloseBtn || isReloadBtn"
-        >
-          <img
-            src="./images/close.png"
-            alt=""
-            @click="close"
-            v-if="isCloseBtn"
-          />
-          <img
-            src="./images/reload.png"
-            alt=""
-            @click="reload"
-            v-if="isReloadBtn"
-          />
+        <div class="operational" v-if="isCloseBtn || isReloadBtn">
+          <img src="./images/close.png" alt="" @click="close" v-if="isCloseBtn" />
+          <img src="./images/reload.png" alt="" @click="reload" v-if="isReloadBtn" />
         </div>
       </div>
     </div>
-    <popup
-      v-model:show="popupShow"
-      position="bottom"
-      :overlay="false"
-      :teleport="getContainer()"
-      class="result-popup"
-      :class="{ 'popup-success': verifyResult }"
-    >
+    <popup v-model:show="popupShow" position="bottom" :overlay="false" :teleport="getContainer()" class="result-popup"
+      :class="{ 'popup-success': verifyResult }">
       {{ verifyResult ? sText : eText }}
     </popup>
   </div>
 </template>
 
 <script lang="ts">
+/* eslint-disable */
+// @ts-nocheck
 import {
   defineComponent,
   reactive,
@@ -285,7 +214,7 @@ export default defineComponent({
         placehold.style.opacity = '0'
       }
 
-      const up = () => {
+      const up = (isVerify = true) => {
         state.isTouch = false
         document.removeEventListener('mousemove', move)
         document.removeEventListener('mouseup', up)
@@ -293,26 +222,27 @@ export default defineComponent({
         document.removeEventListener('touchmove', move)
         document.removeEventListener('touchend', up)
 
-        targetDom.style.left = '0'
-        linkageDom.style.left = '0'
 
-        // console.log('x', x)
+        if (isVerify) {
+          // 图块契合度 左右5 偏差
+          const intervalMax = state.blkTilesW + 5
+          const intervalMin = state.blkTilesW - 5
+          if (x >= intervalMin && x <= intervalMax) {
+            state.verifyResult = true
+            context.emit('success')
+          } else {
+            state.verifyResult = false
+            context.emit('fail')
+          }
 
-        // 图块契合度 左右5 偏差
-        const intervalMax = state.blkTilesW + 5
-        const intervalMin = state.blkTilesW - 5
-        if (x >= intervalMin && x <= intervalMax) {
-          state.verifyResult = true
-          context.emit('success')
-        } else {
-          state.verifyResult = false
-          context.emit('fail')
+          state.popupShow = true
+          setTimeout(() => {
+            state.popupShow = false
+          }, 500)
         }
 
-        state.popupShow = true
-        setTimeout(() => {
-          state.popupShow = false
-        }, 500)
+        targetDom.style.left = '0'
+        linkageDom.style.left = '0'
         initCanvas()
       }
 
@@ -324,7 +254,7 @@ export default defineComponent({
         document.addEventListener('touchend', up)
       }
 
-      if (isClick) up()
+      if (isClick) up(false)
     }
 
     const draw = (
