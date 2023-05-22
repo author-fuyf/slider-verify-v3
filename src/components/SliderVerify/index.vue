@@ -198,9 +198,10 @@ export default defineComponent({
         if (terminal === 'pc') {
           x = moveEV.x - event.x
         } else {
-          x = moveEV.changedTouches[0].clientX - event.changedTouches[0].clientX
+          // click事件触发changedTouches可能丢失
+          x = moveEV.changedTouches[0].clientX - (event.changedTouches ? event.changedTouches[0].clientX : event.clientX)
         }
-        // console.log('x', x)
+
         /**
          * 滑块拖动限定
          *
