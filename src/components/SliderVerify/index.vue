@@ -110,6 +110,10 @@ export default defineComponent({
       type: String,
       default: '请正确拼合图像',
     },
+    isShowTip: {
+      type: Boolean,
+      default: true
+    },
     isCloseBtn: {
       type: Boolean,
       default: true,
@@ -121,7 +125,7 @@ export default defineComponent({
     isParentNode: {
       type: Boolean,
       default: false,
-    },
+    }
   },
   components: {
     Popup,
@@ -236,7 +240,7 @@ export default defineComponent({
             context.emit('fail')
           }
 
-          state.popupShow = true
+          if (props.isShowTip) state.popupShow = true
           setTimeout(() => {
             state.popupShow = false
           }, 500)

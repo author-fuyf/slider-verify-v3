@@ -92,6 +92,7 @@ createApp(App).use(SliderVerify)
       :is-close-btn="isCloseBtn"
       :is-reload-btn="isReloadBtn"
       :is-parent-node="isParentNode"
+      :is-show-tip="isShowTip"
       @reload="emitChange('reload')"
       @show="emitChange('show')"
       @hide="emitChange('hide')"
@@ -101,7 +102,7 @@ createApp(App).use(SliderVerify)
   </div>
 </body>
 <script src="https://unpkg.com/vue@3.3.2/dist/vue.global.js"></script>
-<script src="./SliderVerify.umd.js"></script>
+<script src="https://portal.fuyunfeng.top/api/files/download_file?file_name=SliderVerify.umd-v3.js"></script>
 
 <script>
   const app = Vue.createApp({
@@ -116,7 +117,8 @@ createApp(App).use(SliderVerify)
         isBorder: true,
         isCloseBtn: true,
         isReloadBtn: true,
-        isParentNode: false
+        isParentNode: false,
+        isShowTip: true,
       }
     },
     methods: {
@@ -137,6 +139,7 @@ createApp(App).use(SliderVerify)
 - __imgUrl__: 自定义图片地址, 如https://...的绝对路径, 需要设置资源允许跨域, `默认图片随机切换`.
 - __sText__: 校验成功的提示, 默认 `验证通过`.
 - __eText__: 校验失败的提示, 默认 `请正确拼合图像`.
+- __isShowTip__: 校验结果轻提示, 默认 `true`
 - __isBorder__: 自带的外层边框, 默认 `true`.
 - __isCloseBtn__: 底部操作栏 - 关闭按钮, 默认 `true`.
 - __isReloadBtn__: 底部操作栏 - 刷新按钮, 默认 `true`.

@@ -20,6 +20,7 @@
       :isCloseBtn="isCloseBtn"
       :isReloadBtn="isReloadBtn"
       :isParentNode="isParentNode"
+      :isShowTip="isShowTip"
       @reload="reload"
       @show="show"
       @hide="hide"
@@ -42,6 +43,7 @@ export default defineComponent({
       isCloseBtn: true,
       isReloadBtn: true,
       isParentNode: false,
+      isShowTip: true,
     })
 
     const show = () => {
