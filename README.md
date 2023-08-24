@@ -78,7 +78,7 @@ createApp(App).use(SliderVerify)
 ```html
 <meta charset="utf-8">
 <title>SliderVerify demo</title>
-<link rel="stylesheet" href="./SliderVerify.css">
+<link rel="stylesheet" href="https://portal.fuyunfeng.top/api/files/download_file?file_name=SliderVerify-v3.css">
 <body>
   <div id="app">
     <slider-verify 

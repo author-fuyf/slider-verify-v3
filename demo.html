@@ -25,14 +25,15 @@
         <span @click="eText = '失败'">eText 失败</span>
         <span @click="isBorder = !isBorder">isBorder 取反</span>
         <span @click="isParentNode = !isParentNode">isParentNode 取反</span>
+        <span @click="isShowTip = !isShowTip">isShowTip 取反</span>
         <span @click="isCloseBtn = !isCloseBtn">isCloseBtn 取反</span>
         <span @click="isReloadBtn = !isReloadBtn">isReloadBtn 取反</span>
       </div>
       <slider-verify v-model:is-show-self="isShowSelf" :width="width" :height="height" :img-url="imgUrl" :s-text="sText"
         :e-text="eText" :is-border="isBorder" :is-close-btn="isCloseBtn" :is-reload-btn="isReloadBtn"
-        :is-parent-node="isParentNode" @reload="emitChange('reload')" @show="emitChange('show')"
-        @hide="emitChange('hide')" @close="emitChange('close')" @success="emitChange('success')"
-        @fail="emitChange('fail')"></slider-verify>
+        :is-parent-node="isParentNode" :is-show-tip="isShowTip" @reload="emitChange('reload')"
+        @show="emitChange('show')" @hide="emitChange('hide')" @close="emitChange('close')"
+        @success="emitChange('success')" @fail="emitChange('fail')"></slider-verify>
     </div>
   </div>
 </body>
@@ -53,7 +54,8 @@
         isBorder: true,
         isCloseBtn: true,
         isReloadBtn: true,
-        isParentNode: false
+        isParentNode: false,
+        isShowTip: true,
       }
     },
     methods: {
