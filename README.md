@@ -46,14 +46,15 @@ createApp(App).use(SliderVerify)
 <template>
   <div>
     <SliderVerify
+      v-model:isShowSelf="sliderVConf.isShowSelf"
       :imgUrl="sliderVConf.imgUrl"
       :sText="sliderVConf.sText"
       :eText="sliderVConf.eText"
-      v-model:isShowSelf="sliderVConf.isShowSelf"
       :isBorder="sliderVConf.isBorder"
       :isParentNode="sliderVConf.isParentNode"
       :isCloseBtn="sliderVConf.isCloseBtn"
       :isReloadBtn="sliderVConf.isReloadBtn"
+      :is-show-tip="isShowTip"
       :width="sliderVConf.width"
       :height="sliderVConf.height"
       @reload="emitChange('reload')"
