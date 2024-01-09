@@ -14,7 +14,7 @@
           </div>
           <canvas id="bg_canvas" v-show="!loading"></canvas>
           <canvas v-show="!loading" id="block_canvas" @mousedown.prevent="(e) => drag(e, 'block_canvas', 'circle')"
-            @touchstart="(e) => {
+            @touchstart.prevent="(e) => {
               terminal = 'mobile'
               drag(e, 'block_canvas', 'circle')
             }
@@ -24,7 +24,7 @@
   }"></canvas>
         </div>
         <div class="slide-box">
-          <div id="circle" @mousedown.prevent="(e) => drag(e, 'circle', 'block_canvas')" @touchstart="(e) => {
+          <div id="circle" @mousedown.prevent="(e) => drag(e, 'circle', 'block_canvas')" @touchstart.prevent="(e) => {
             terminal = 'mobile'
             drag(e, 'circle', 'block_canvas')
           }
